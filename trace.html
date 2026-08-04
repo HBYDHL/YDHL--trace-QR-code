@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>钢筋套筒产品追溯</title>
+<style>
+body{font-family:sans-serif;background:#8B1A1A;padding:8px;margin:0}
+.c{background:#FFF8E7;max-width:600px;margin:0 auto;border-radius:8px;overflow:hidden}
+.h{background:#8B1A1A;color:#C9A84C;text-align:center;padding:12px;font-size:18px;font-weight:bold}
+table{width:100%;border-collapse:collapse}
+th{background:#8B1A1A;color:#FFD700;padding:5px;font-size:13px;border:1px solid #C9A84C}
+td{padding:4px 6px;font-size:12px;border:1px solid #D4C5A0;color:#3B2F1A}
+.l{color:#8B6914;font-weight:bold;white-space:nowrap;width:90px}
+.f{text-align:center;padding:6px;font-size:10px;color:#8B6914;border-top:1px dashed #C9A84C}
+.e{text-align:center;padding:20px;color:#8B1A1A}
+</style>
+</head>
+<body>
+<div class="c">
+<div class="h">钢筋套筒产品追溯</div>
+<div id="content"></div>
+</div>
+<script>
+function b64decode(str) {
+  try {
+    const bin = atob(str.replace(/-/g,'+').replace(/_/g,'/'));
+    return new TextDecoder('utf-8').decode(Uint8Array.from(bin,c=>c.charCodeAt(0)));
+  } catch(e) { return null; }
+}
+
+const hash = location.hash.slice(1);
+const el = document.getElementById('content');
+
+if (hash) {
+  const html = b64decode(hash);
+  if (html) {
+    el.innerHTML = html;
+  } else {
+    el.innerHTML = '<div class="e">追溯数据解析失败，请确认二维码正确</div>';
+  }
+} else {
+  el.innerHTML = '<div class="e">请扫描产品追溯二维码</div>';
+}
+</script>
+</body>
+</html>
