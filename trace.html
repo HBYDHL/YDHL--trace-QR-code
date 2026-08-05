@@ -13,6 +13,7 @@ th{background:#8B1A1A;color:#FFD700;padding:5px;font-size:13px;border:1px solid 
 td{padding:4px 6px;font-size:12px;border:1px solid #D4C5A0;color:#3B2F1A}
 .l{color:#8B6914;font-weight:bold;white-space:nowrap;width:90px}
 .f{text-align:center;padding:6px;font-size:10px;color:#8B6914;border-top:1px dashed #C9A84C}
+.t{text-align:center;padding:8px;font-size:13px;color:#8B1A1A;font-weight:bold;border-top:1px solid #C9A84C}
 .e{text-align:center;padding:20px;color:#8B1A1A}
 </style>
 </head>
@@ -50,7 +51,7 @@ function renderTable(values) {
   for (let i = 9; i < 15; i++) {
     html += '<tr><td class="l">' + FIELD_LABELS[i] + '</td><td>' + escapeHtml(values[i]) + '</td></tr>';
   }
-  html += '</table><div class="f">扫码追溯 &middot; ' + escapeHtml(values[6]) + '</div>';
+  html += '</table><div class="t" id="clock"></div>';
   return html;
 }
 
@@ -69,11 +70,24 @@ if (data) {
   if (raw) {
     const values = raw.split('|');
     el.innerHTML = renderTable(values);
+    startClock();
   } else {
     el.innerHTML = '<div class="e">追溯数据解析失败，请确认二维码正确</div>';
   }
 } else {
   el.innerHTML = '<div class="e">请扫描产品追溯二维码</div>';
+}
+
+function startClock() {
+  function tick() {
+    const c = document.getElementById('clock');
+    if (c) {
+      const now = new Date();
+      c.textContent = now.toLocaleString('zh-CN', {hour12: false});
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
 }
 </script>
 </body>
