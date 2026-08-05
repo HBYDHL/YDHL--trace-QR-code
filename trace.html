@@ -22,20 +22,53 @@ td{padding:4px 6px;font-size:12px;border:1px solid #D4C5A0;color:#3B2F1A}
 <div id="content"></div>
 </div>
 <script>
-function b64decode(str) {
+const FIELD_LABELS = [
+  "产品名称","规格型号","执行标准","数量","重量",
+  "生产批号","生产日期","生产厂家","地址/电话",
+  "适用钢筋","原材料牌号","原材料炉号","接头性能等级",
+  "产品合格证编号","型式检验报告编号"
+];
+
+function b64urlDecode(str) {
   try {
-    const bin = atob(str.replace(/-/g,'+').replace(/_/g,'/'));
-    return new TextDecoder('utf-8').decode(Uint8Array.from(bin,c=>c.charCodeAt(0)));
+    let b64 = str.replace(/-/g, '+').replace(/_/g, '/');
+    while (b64.length % 4) b64 += '=';
+    const bin = atob(b64);
+    return new TextDecoder('utf-8').decode(Uint8Array.from(bin, c => c.charCodeAt(0)));
   } catch(e) { return null; }
 }
 
-const hash = location.hash.slice(1);
-const el = document.getElementById('content');
+function renderTable(values) {
+  if (!values || values.length < 15) {
+    return '<div class="e">追溯数据不完整，请确认二维码正确</div>';
+  }
+  let html = '<table><tr><th colspan="2">基础信息</th></tr>';
+  for (let i = 0; i < 9; i++) {
+    html += '<tr><td class="l">' + FIELD_LABELS[i] + '</td><td>' + escapeHtml(values[i]) + '</td></tr>';
+  }
+  html += '</table><table><tr><th colspan="2">质量追溯</th></tr>';
+  for (let i = 9; i < 15; i++) {
+    html += '<tr><td class="l">' + FIELD_LABELS[i] + '</td><td>' + escapeHtml(values[i]) + '</td></tr>';
+  }
+  html += '</table><div class="f">扫码追溯 &middot; ' + escapeHtml(values[6]) + '</div>';
+  return html;
+}
 
-if (hash) {
-  const html = b64decode(hash);
-  if (html) {
-    el.innerHTML = html;
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+const el = document.getElementById('content');
+const params = new URLSearchParams(location.search);
+const data = params.get('d');
+
+if (data) {
+  const raw = b64urlDecode(data);
+  if (raw) {
+    const values = raw.split('|');
+    el.innerHTML = renderTable(values);
   } else {
     el.innerHTML = '<div class="e">追溯数据解析失败，请确认二维码正确</div>';
   }
