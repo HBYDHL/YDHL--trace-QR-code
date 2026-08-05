@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'sha256-b4Pw72XsDBXiuvY7L4X/USqaZjeLN+CSg9eBu42ReBw='; script-src 'sha256-vkewOJsIUerTRczbCtTFzArwGb6GGA7zD/THd+eSwRw='; base-uri 'none'; form-action 'none';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'sha256-b4Pw72XsDBXiuvY7L4X/USqaZjeLN+CSg9eBu42ReBw='; script-src 'sha256-LCz9tV1BmTQ4PkiYdrZwV1zwi/9yvmh1PQiNbIvYRd8='; base-uri 'none'; form-action 'none';">
 <title>钢筋套筒产品追溯</title>
 <style>
 body{font-family:sans-serif;background:#8B1A1A;padding:8px;margin:0}
@@ -25,10 +25,9 @@ td{padding:4px 6px;font-size:12px;border:1px solid #D4C5A0;color:#3B2F1A}
 </div>
 <script>
 const FIELD_LABELS = [
-  "产品名称","规格型号","执行标准","数量","重量",
+  "获取认证","产品名称","规格型号","数量",
   "生产批号","生产日期","生产厂家","地址/电话",
-  "适用钢筋","原材料牌号","原材料炉号","接头性能等级",
-  "产品合格证编号","型式检验报告编号"
+  "原材料牌号","原材料炉号","接头性能等级"
 ];
 
 function b64urlDecode(str) {
