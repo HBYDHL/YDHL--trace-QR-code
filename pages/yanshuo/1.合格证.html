@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>批次 1.合格证 / Batch 1.合格证</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif; background: #f0f2f5; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+.container { width: 100%; max-width: 500px; padding: 20px; flex: 1; }
+.card { background: #fff; border-radius: 12px; padding: 32px 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 16px; }
+h2 { font-size: 20px; color: #1a1a1a; margin-bottom: 8px; }
+h2 small { font-size: 14px; color: #888; font-weight: normal; display: block; margin-top: 4px; }
+.info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 15px; }
+.info-label { color: #1a1a1a; white-space: nowrap; margin-right: 16px; font-size: 15px; line-height: 1.4; }
+.info-label small { display: block; color: #888; font-size: 12px; font-weight: normal; margin-top: 2px; }
+.info-value { color: #1a1a1a; text-align: right; word-break: break-all; }
+.btn { display: block; width: 100%; padding: 16px; border: none; border-radius: 8px; font-size: 17px; font-weight: bold; cursor: pointer; text-align: center; margin-top: 16px; transition: opacity 0.2s; }
+.btn:hover { opacity: 0.85; }
+.btn-download { background: #1a73e8; color: #fff; }
+.btn-download small { display: block; color: rgba(255,255,255,0.8); font-size: 12px; font-weight: normal; margin-top: 3px; }
+.btn-submit { background: #1a73e8; color: #fff; }
+input[type="password"] { width: 100%; padding: 14px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; outline: none; transition: border-color 0.2s; }
+input[type="password"]:focus { border-color: #1a73e8; }
+.error { color: #e53935; font-size: 14px; margin-top: 8px; display: none; }
+#screen2 { display: none; }
+.footer { text-align: center; color: #999; font-size: 13px; padding: 20px; width: 100%; }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="card" id="screen1">
+<h2>请输入查看密码 <small>Enter password to view</small></h2>
+<input type="password" id="pwd" placeholder="Password / 密码">
+<div class="error" id="err">密码错误 / Incorrect password</div>
+<button class="btn btn-submit" onclick="checkPwd()">确认 / Confirm</button>
+</div>
+<div class="card" id="screen2">
+<h2>批次编号 <small>Batch No.</small></h2>
+<p style="font-size:22px;font-weight:bold;color:#1a73e8;margin:8px 0 16px;">1.合格证</p>
+<div class="info-row"><span class="info-label">厂家<br><small>Manufacturer</small></span><span class="info-value">中国河北易达核联机械制造股份有限公司<br><small>Hebei Yida United Machinery Co.,Ltd.</small></span></div>
+<div class="info-row"><span class="info-label">地址<br><small>Address</small></span><span class="info-value">中国河北省石家庄市藁城区石家庄经济技术开发区东部园区东宁路6号<br><small>No.6 Dongning Road, Eastern Park, Shijiazhuang Economic and Technological Development Zone, Gaocheng District, Shijiazhuang, Hebei, China</small></span></div>
+<div class="info-row"><span class="info-label">联系电话<br><small>Contact</small></span><span class="info-value">+86-0311-83095097</span></div>
+<button class="btn btn-download" onclick="downloadPDF()">质保资料下载<br><small>Download Warranty Documents</small></button>
+</div>
+</div>
+<div class="footer" id="clock"></div>
+<script>
+const PASSWORD = "123456";
+const PDF_URL = "https://hbydhl.github.io/YDHL--trace-QR-code/certs/yanshuo/1.合格证.pdf";
+function checkPwd() {
+    const input = document.getElementById("pwd").value;
+    if (input === PASSWORD) {
+        document.getElementById("screen1").style.display = "none";
+        document.getElementById("screen2").style.display = "block";
+    } else {
+        document.getElementById("err").style.display = "block";
+    }
+}
+function downloadPDF() { window.open(PDF_URL, "_blank"); }
+document.getElementById("pwd").addEventListener("keydown", function(e) { if (e.key === "Enter") checkPwd(); });
+function updateClock() {
+    const now = new Date();
+    const s = now.toLocaleString("zh-CN", { timeZone: "Asia/Shanghai", hour12: false });
+    document.getElementById("clock").textContent = "当前时间 / Current Time: " + s;
+}
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
