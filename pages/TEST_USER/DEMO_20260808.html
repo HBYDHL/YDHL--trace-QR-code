@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>批次 DEMO_20260808 / Batch DEMO_20260808</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif; background: #f0f2f5; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+.container { width: 100%; max-width: 500px; padding: 20px; flex: 1; }
+.card { background: #fff; border-radius: 12px; padding: 32px 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 16px; }
+h2 { font-size: 20px; color: #1a1a1a; margin-bottom: 8px; }
+h2 small { font-size: 14px; color: #888; font-weight: normal; display: block; margin-top: 4px; }
+.info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 15px; }
+.info-label { color: #666; white-space: nowrap; margin-right: 16px; }
+.info-value { color: #1a1a1a; text-align: right; word-break: break-all; }
+.btn { display: block; width: 100%; padding: 16px; border: none; border-radius: 8px; font-size: 17px; font-weight: bold; cursor: pointer; text-align: center; margin-top: 16px; transition: opacity 0.2s; }
+.btn:hover { opacity: 0.85; }
+.btn-download { background: #1a73e8; color: #fff; text-decoration: none; }
+.btn-submit { background: #1a73e8; color: #fff; }
+input[type="password"] { width: 100%; padding: 14px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; outline: none; transition: border-color 0.2s; }
+input[type="password"]:focus { border-color: #1a73e8; }
+.error { color: #e53935; font-size: 14px; margin-top: 8px; display: none; }
+#screen2 { display: none; }
+.footer { text-align: center; color: #999; font-size: 13px; padding: 20px; width: 100%; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Screen 1: Password -->
+<div class="card" id="screen1">
+<h2>请输入查看密码 <small>Enter password to view</small></h2>
+<input type="password" id="pwd" placeholder="Password / 密码">
+<div class="error" id="err">密码错误 / Incorrect password</div>
+<button class="btn btn-submit" onclick="checkPwd()">确认 / Confirm</button>
+</div>
+
+<!-- Screen 2: Info + Download -->
+<div class="card" id="screen2">
+<h2>批次编号 <small>Batch No.</small></h2>
+<p style="font-size:22px;font-weight:bold;color:#1a73e8;margin:8px 0 16px;">DEMO_20260808</p>
+
+<div class="info-row"><span class="info-label">厂家 / Manufacturer</span><span class="info-value">测试厂家</span></div>
+<div class="info-row"><span class="info-label">地址 / Address</span><span class="info-value">测试地址</span></div>
+<div class="info-row"><span class="info-label">联系电话 / Contact</span><span class="info-value">13800000000</span></div>
+
+<a href="../certs/TEST_USER/DEMO_20260808.pdf" class="btn btn-download" download target="_blank">下载证书 / Download Certificate</a>
+</div>
+
+</div>
+
+<div class="footer" id="clock"></div>
+
+<script>
+const PASSWORD = "demo123";
+
+function checkPwd() {
+    const input = document.getElementById("pwd").value;
+    if (input === PASSWORD) {
+        document.getElementById("screen1").style.display = "none";
+        document.getElementById("screen2").style.display = "";
+    } else {
+        document.getElementById("err").style.display = "block";
+    }
+}
+
+document.getElementById("pwd").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") checkPwd();
+});
+
+function updateClock() {
+    const now = new Date();
+    const s = now.toLocaleString("zh-CN", { timeZone: "Asia/Shanghai", hour12: false });
+    document.getElementById("clock").textContent = "当前时间 / Current Time: " + s;
+}
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
