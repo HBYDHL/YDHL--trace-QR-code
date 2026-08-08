@@ -45,7 +45,7 @@ input[type="password"]:focus { border-color: #1a73e8; }
 <div class="info-row"><span class="info-label">地址 / Address</span><span class="info-value">请填写地址</span></div>
 <div class="info-row"><span class="info-label">联系电话 / Contact</span><span class="info-value">请填写电话</span></div>
 
-<a href="../certs/张彩虹/123456789.pdf" class="btn btn-download" download target="_blank">下载证书 / Download Certificate</a>
+<button class="btn btn-download" onclick="downloadPDF()">下载证书 / Download Certificate</button>
 </div>
 
 </div>
@@ -54,6 +54,7 @@ input[type="password"]:focus { border-color: #1a73e8; }
 
 <script>
 const PASSWORD = "123456";
+const PDF_URL = "../certs/张彩虹/123456789.pdf";
 
 function checkPwd() {
     const input = document.getElementById("pwd").value;
@@ -63,6 +64,19 @@ function checkPwd() {
     } else {
         document.getElementById("err").style.display = "block";
     }
+}
+
+function downloadPDF() {
+    const a = document.createElement("a");
+    a.href = PDF_URL;
+    a.download = "";
+    a.target = "_blank";
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    // 兜底：直接打开
+    setTimeout(function() { window.open(PDF_URL, "_blank"); }, 300);
 }
 
 document.getElementById("pwd").addEventListener("keydown", function(e) {
