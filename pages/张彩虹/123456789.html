@@ -12,7 +12,8 @@ body { font-family: "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif; back
 h2 { font-size: 20px; color: #1a1a1a; margin-bottom: 8px; }
 h2 small { font-size: 14px; color: #888; font-weight: normal; display: block; margin-top: 4px; }
 .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 15px; }
-.info-label { color: #666; white-space: nowrap; margin-right: 16px; }
+.info-label { color: #1a1a1a; white-space: nowrap; margin-right: 16px; font-size: 15px; line-height: 1.4; }
+.info-label small { display: block; color: #888; font-size: 12px; font-weight: normal; margin-top: 2px; }
 .info-value { color: #1a1a1a; text-align: right; word-break: break-all; }
 .btn { display: block; width: 100%; padding: 16px; border: none; border-radius: 8px; font-size: 17px; font-weight: bold; cursor: pointer; text-align: center; margin-top: 16px; transition: opacity 0.2s; }
 .btn:hover { opacity: 0.85; }
@@ -41,9 +42,9 @@ input[type="password"]:focus { border-color: #1a73e8; }
 <h2>批次编号 <small>Batch No.</small></h2>
 <p style="font-size:22px;font-weight:bold;color:#1a73e8;margin:8px 0 16px;">123456789</p>
 
-<div class="info-row"><span class="info-label">厂家 / Manufacturer</span><span class="info-value">中国河北易达核联机械制造股份有限公司</span></div>
-<div class="info-row"><span class="info-label">地址 / Address</span><span class="info-value">中国河北省石家庄市藁城区石家庄经济技术开发区东部园区东宁路6号</span></div>
-<div class="info-row"><span class="info-label">联系电话 / Contact</span><span class="info-value">+86-0311-83095097</span></div>
+<div class="info-row"><span class="info-label">厂家<br><small>Manufacturer</small></span><span class="info-value">中国河北易达核联机械制造股份有限公司</span></div>
+<div class="info-row"><span class="info-label">地址<br><small>Address</small></span><span class="info-value">中国河北省石家庄市藁城区石家庄经济技术开发区东部园区东宁路6号</span></div>
+<div class="info-row"><span class="info-label">联系电话<br><small>Contact</small></span><span class="info-value">+86-0311-83095097</span></div>
 
 <button class="btn btn-download" onclick="downloadPDF()">下载证书 / Download Certificate</button>
 </div>
