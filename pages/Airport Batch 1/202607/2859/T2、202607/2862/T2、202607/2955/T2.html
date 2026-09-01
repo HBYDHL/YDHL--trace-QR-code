@@ -49,6 +49,7 @@ input[type="password"]:focus { border-color: #1a73e8; }
 <script>
 const PASSWORD = "123456";
 const PDF_URL = "https://hbydhl.github.io/YDHL--trace-QR-code/certs/Airport%20Batch%201/Airport%20Batch%201.pdf";
+const DL_NAME = "Airport Batch 120260901.pdf";
 function checkPwd() {
     const input = document.getElementById("pwd").value;
     if (input === PASSWORD) {
@@ -58,7 +59,14 @@ function checkPwd() {
         document.getElementById("err").style.display = "block";
     }
 }
-function downloadPDF() { window.open(PDF_URL, "_blank"); }
+function downloadPDF() {
+    const a = document.createElement("a");
+    a.href = PDF_URL;
+    a.download = DL_NAME;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
 document.getElementById("pwd").addEventListener("keydown", function(e) { if (e.key === "Enter") checkPwd(); });
 function updateClock() {
     const now = new Date();
